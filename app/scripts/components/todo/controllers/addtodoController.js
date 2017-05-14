@@ -6,16 +6,23 @@ addtodoController.$inject = ['AddtodoFactory'];
 
 function addtodoController(AddtodoFactory) {
     var vm = this;
-
-    init()
+    vm.cancel = cancel;
+    vm.addTodo = addTodo;
 
     /////////////////////
-    function init() {
+    function addTodo() {
         AddtodoFactory.addTodo(
             {
-                title:vm.title,
-
+                title: vm.title,
+                date: vm.date,
+                desc: vm.desc,
+                status: true
             }
         );
+    }
+    
+    function cancel() {
+
+        //Will toggle the Case For Add or not
     }
 }

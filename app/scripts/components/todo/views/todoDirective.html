@@ -2,5 +2,40 @@
 
     <add-todo></add-todo>
 
+    <div class="preDate complete">
+        <input ng-model = "vm.preCompleteFilter">
+        <ul>
+            <li ng-repeat="complete in vm.pre.complete | filter : {task: vm.preCompleteFilter}">
+                <a ui-sref="pre.complete({taskId: id})" href="">{{complete.task}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="preDate incomplete">
+        <input ng-model = "vm.preIncompleteFilter">
+        <ul>
+            <li ng-repeat="incomplete in vm.pre.incomplete | filter: {task:vm.preIncompleteFilter} ">
+                <a ui-sref="pre.incomplete({taskId: id})" href="">{{incomplete.task}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="postDate complete">
+        <input ng-model = "vm.postCompleteFilter">
+        <ul>
+            <li ng-repeat="complete in vm.post.complete | filter: {task: vm.postCompleteFilter}">
+                <a ui-sref="pre.complete({taskId: id})" href="">{{complete.task}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="postDate incomplete">
+        <input ng-model = "vm.postIncompleteFilter">
+        <ul>
+            <li ng-repeat="incomplete in vm.post.incomplete | filter: {task: postIncompleteFilter} ">
+                <a ui-sref="pre.incomplete({taskId: id})" href="">{{incomplete.task}}</a>
+            </li>
+        </ul>
+    </div>
 
 </div>

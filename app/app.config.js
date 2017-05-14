@@ -2,17 +2,14 @@ var angular = require('angular');
 require('angular-ui-router');
 var app = angular.module('app',['ui.router']);
 
-routeConfig.$inject = ['$locationProvider','$stateProvider','$urlRouterProvider'];
+var routerConfigurations =  require('./app.route');
+
+routeConfig.$inject = ['$logProvider','$locationProvider','$stateProvider','$urlRouterProvider'];
 
 app.config(routeConfig)
 
-var routerConfigurations =  require('./app.route');
-
-
-function routeConfig(locationProvider,stateProvider,urlRouterProvider){
+function routeConfig($logProvider,locationProvider,stateProvider,urlRouterProvider){
+    // $logProvider.debugEnabled(false);
     routerConfigurations(locationProvider,stateProvider,urlRouterProvider);
 }
-
-require("./scripts/components/todo/directives/todoDirective");
-require("./scripts/components/todo/controllers");
 

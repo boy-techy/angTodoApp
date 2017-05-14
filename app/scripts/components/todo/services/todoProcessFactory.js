@@ -2,20 +2,55 @@
 angular.module('app')
        .factory('TodoProcessFactory',todoProcessFactory);
 
-todoProcessFactory.$inject = ['TodoProducerFactory'];
+todoProcessFactory.$inject = ['TodoFormatFactory'];
 
-function todoProcessFactory(todoProducer) {
+function todoProcessFactory(todoFormat) {
     var service = {};
-
     service.getTodoList = getTodoList;
+    service.addNewTodo = addNewTodo;
+    service.registerUpdateListener = registerUpdateListener;
+    var listeners = [];
+    service.ACTIONS = {
+        UPDATE: "update"
+    };
+
     return service;
+
 
     ////////////////////////////////////////
     function getTodoList() {
-        return todoProducer.todoProduce()
+        return todoFormat.generateTodo()
                     .then(function (todos) {
-                        return todosType(todos)
+                        var type_todo =  todosType(todos)
+                        createCache(type_todo);
+                        return type_todo;
                     });
+    }
+
+    function registerUpdateListener(key,callback) {
+        var obj = {};
+        obj[key] = callback;
+        listeners.push(obj);
+    }
+
+    function addNewTodo(newTodo) {
+        var newTodos =  todoFormat.generateTodo([newTodo]);
+        updateCache(newTodos);
+        listeners.forEach(function (value) {
+            if(value.hasOwnProperty("update")){
+                value.update();
+            }
+        })
+    }
+
+    function createCache(todos) {
+        localStorage.setItem("todo",JSON.stringify(todos));
+    }
+
+    function updateCache(newTodos) {
+        var arr_todo = JSON.parse(localStorage.getItem("todo"));
+        arr_todo =  arr_todo.concat(newTodos);
+        localStorage.setItem("todo",JSON.stringify(arr_todo));
     }
 
     function todosType(todos) {
