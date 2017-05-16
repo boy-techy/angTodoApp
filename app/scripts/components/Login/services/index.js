@@ -1,2 +1,3 @@
 
 require("./loginFactory");
+require("./signUpFactory");

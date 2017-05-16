@@ -13,3 +13,8 @@ function routeConfig(logProvider,locationProvider,stateProvider,urlRouterProvide
     routerConfigurations(locationProvider,stateProvider,urlRouterProvider);
 }
 
+app.run(function () {
+        localStorage.clear();
+});
+
+

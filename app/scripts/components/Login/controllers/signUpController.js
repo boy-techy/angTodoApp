@@ -1,10 +1,12 @@
 
+require("../services");
+
 angular.module("app")
         .controller("SignUpController",signUpController);
 
-signUpController.$inject = ["$state"];
+signUpController.$inject = ["$state","SignUpFactory"];
 
-function signUpController(state) {
+function signUpController(state,SignUpFactory) {
     var vm = this;
 
     init();
@@ -12,19 +14,26 @@ function signUpController(state) {
     /////////////////////////////////////////
     function init() {
         vm.create = create;
+        vm.signIn = signIn;
+
+        function signIn() {
+            state.go("signin");
+        }
 
         function create() {
-            var users = JSON.parse(localStorage.getItem("users"));
-            users = users?users:[];
-            users.push({
+            var success = SignUpFactory.addUser({
                 name: vm.name,
                 dob: vm.dob,
                 email: vm.email,
                 pwd: vm.pwd
             });
-            localStorage.setItem("users",JSON.stringify(users));
 
-            state.go("signin");
+            if(success){
+                state.go("signin");
+            }
+            else{
+                vm.error = true;
+            }
         }
     }
 }
