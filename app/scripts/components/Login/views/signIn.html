@@ -1,0 +1,13 @@
+<div class="login" ng-controller="LoginController as vm">
+    <h3>Todo App</h3>
+    <h5>Sign in to Your Account</h5>
+
+    <form>
+        <input type="text" placeholder="Username" ng-model="vm.username">
+        <input type="password" placeholder="Password" ng-model="vm.pwd">
+        <input type="button" ng-click="vm.signIn()" value="SignIn" class="signButton">
+        <input type="button" ng-click="vm.signUp()" value="SignUp" class="signupButton">
+    </form>
+
+    <span ng-show="vm.error" class="error">Usernmae/Password Mismatch!!!!!!!!!!!</span>
+</div>

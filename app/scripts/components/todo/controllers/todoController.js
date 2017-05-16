@@ -8,6 +8,8 @@ todoController.$inject = ['TodoProcessFactory','$log'];
 
 function todoController(todoProcessFactory,$log) {
     var vm = this;
+    vm.delete = deleteTodo;
+    vm.edit = editTodo;
     init();
 
     /////////////////////////////////////////////////////
@@ -15,7 +17,14 @@ function todoController(todoProcessFactory,$log) {
         registerListeners();
         initialView();
     }
-
+    
+    function deleteTodo(beforeAfter,type,id) {
+        todoProcessFactory.deleteTodo(beforeAfter,type,id);
+    }
+    
+    function editTodo(beforeAfter,type,id) {
+        todoProcessFactory.editTodo(beforeAfter,type,id);
+    }
 
     function registerListeners() {
         todoProcessFactory.registerUpdateListener(todoProcessFactory.ACTIONS.UPDATE,
@@ -24,8 +33,11 @@ function todoController(todoProcessFactory,$log) {
     }
 
     function updateView() {
-        $log.log("Updated View");
-        $log.log(JSON.parse(localStorage.getItem("todo")));
+        $log.debug("Updated View");
+        $log.debug(JSON.parse(localStorage.getItem("todo")));
+        var todos = JSON.parse(localStorage.getItem("todo"));
+        vm.pre = todos.pre;
+        vm.post = todos.post;
     }
 
 
@@ -36,8 +48,8 @@ function todoController(todoProcessFactory,$log) {
                 vm.pre = todoList.pre;
                 vm.post = todoList.post;
 
-                $log.log("Initial Todo");
-                $log.log(localStorage.getItem("todo"));
+                // $log.debug("Initial Todo");
+                // $log.debug(localStorage.getItem("todo"));
             })
     }
 }

@@ -2,11 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="build/styles/style.css">
     <title>ToDoApp</title>
 </head>
 <body ng-app="app" ng-strict-di>
 
-<to-do></to-do>
+<div ng-controller="MainController as vm">
+    <div ui-view="">
+
+            <login-page></login-page>
+
+    </div>
+</div>
+
 
 <script src="build/bundle.js"></script>
 </body>

@@ -2,15 +2,16 @@
 angular.module('app')
         .controller('AddtodoController',addtodoController);
 
-addtodoController.$inject = ['AddtodoFactory'];
+addtodoController.$inject = ['AddtodoFactory','$log'];
 
-function addtodoController(AddtodoFactory) {
+function addtodoController(AddtodoFactory,$log) {
     var vm = this;
-    vm.cancel = cancel;
+
     vm.addTodo = addTodo;
 
     /////////////////////
     function addTodo() {
+        $log.debug("Message from click Function");
         AddtodoFactory.addTodo(
             {
                 title: vm.title,
@@ -19,10 +20,5 @@ function addtodoController(AddtodoFactory) {
                 status: true
             }
         );
-    }
-    
-    function cancel() {
-
-        //Will toggle the Case For Add or not
     }
 }

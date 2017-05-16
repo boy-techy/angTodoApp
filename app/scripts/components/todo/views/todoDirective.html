@@ -2,40 +2,53 @@
 
     <add-todo></add-todo>
 
-    <div class="preDate complete">
-        <input ng-model = "vm.preCompleteFilter">
-        <ul>
-            <li ng-repeat="complete in vm.pre.complete | filter : {task: vm.preCompleteFilter}">
-                <a ui-sref="pre.complete({taskId: id})" href="">{{complete.task}}</a>
-            </li>
-        </ul>
-    </div>
+    <div class="todoList">
+        <div class="preDate complete">
+            <p>PreDate Complete</p>
+            <input ng-model = "vm.preCompleteFilter">
+            <table>
+                <tr ng-repeat="complete in vm.pre.complete | filter : {title: vm.preCompleteFilter}">
+                    <td><a ui-sref="todo({'taskId': complete.id})" href="">{{complete.title}}</a></td>
+                    <td><input type="button" ng-click="vm.edit('pre','complete',complete.id)" value = "Edit"></td>
+                    <td><input type="button" ng-click="vm.delete('pre','complete',complete.id)" value = "Delete"></td>
+                </tr>
+            </table>
+        </div>
 
-    <div class="preDate incomplete">
-        <input ng-model = "vm.preIncompleteFilter">
-        <ul>
-            <li ng-repeat="incomplete in vm.pre.incomplete | filter: {task:vm.preIncompleteFilter} ">
-                <a ui-sref="pre.incomplete({taskId: id})" href="">{{incomplete.task}}</a>
-            </li>
-        </ul>
-    </div>
+        <div class="preDate incomplete">
+            <p>PreDate InComplete</p>
+            <input ng-model = "vm.preIncompleteFilter">
+            <table>
+                <tr ng-repeat="incomplete in vm.pre.incomplete | filter: {title:vm.preIncompleteFilter} ">
+                    <td><a ui-sref="todo({taskId: incomplete.id})" href="">{{incomplete.title}}</a></td>
+                    <td><input type="button" ng-click="vm.edit('pre','incomplete',incomplete.id)" value = "Edit"></td>
+                    <td><input type="button" ng-click="vm.delete('pre','incomplete',incomplete.id)" value = "Delete"></td>
+                </tr>
+            </table>
+        </div>
 
-    <div class="postDate complete">
-        <input ng-model = "vm.postCompleteFilter">
-        <ul>
-            <li ng-repeat="complete in vm.post.complete | filter: {task: vm.postCompleteFilter}">
-                <a ui-sref="pre.complete({taskId: id})" href="">{{complete.task}}</a>
-            </li>
-        </ul>
-    </div>
+        <div class="postDate complete">
+            <p>PostDate Complete</p>
+            <input ng-model = "vm.postCompleteFilter">
+            <table>
+                <tr ng-repeat="complete in vm.post.complete | filter: {title: vm.postCompleteFilter}">
+                    <td><a ui-sref="todo({taskId: complete.id})" href="">{{complete.title}}</a></td>
+                    <td><input type="button" ng-click="vm.edit('post','complete',complete.id)" value = "Edit"></td>
+                    <td><input type="button" ng-click="vm.delete('post','complete',complete.id)" value = "Delete"></td>
+                </tr>
+            </table>
+        </div>
 
-    <div class="postDate incomplete">
-        <input ng-model = "vm.postIncompleteFilter">
-        <ul>
-            <li ng-repeat="incomplete in vm.post.incomplete | filter: {task: postIncompleteFilter} ">
-                <a ui-sref="pre.incomplete({taskId: id})" href="">{{incomplete.task}}</a>
-            </li>
-        </ul>
+        <div class="postDate incomplete">
+            <p>PostDate InComplete</p>
+            <input ng-model = "vm.postIncompleteFilter">
+            <table>
+                <tr ng-repeat="incomplete in vm.post.incomplete | filter: {title: postIncompleteFilter} ">
+                    <td><a ui-sref="todo({taskId: incomplete.id})" href="">{{incomplete.title}}</a></td>
+                    <td><input type="button" ng-click="vm.edit('post','incomplete',incomplete.id)" value = "Edit"></td>
+                    <td><input type="button" ng-click="vm.delete('post','incomplete',incomplete.id)" value = "Delete"></td>
+                </tr>
+            </table>
+        </div>
     </div>
-
 </div>

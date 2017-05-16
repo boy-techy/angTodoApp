@@ -8,8 +8,8 @@ routeConfig.$inject = ['$logProvider','$locationProvider','$stateProvider','$url
 
 app.config(routeConfig)
 
-function routeConfig($logProvider,locationProvider,stateProvider,urlRouterProvider){
-    // $logProvider.debugEnabled(false);
+function routeConfig(logProvider,locationProvider,stateProvider,urlRouterProvider){
+    logProvider.debugEnabled(true);
     routerConfigurations(locationProvider,stateProvider,urlRouterProvider);
 }
 

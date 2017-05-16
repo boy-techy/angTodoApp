@@ -7,11 +7,10 @@
         <input type="date" ng-model="vm.date" id="date">
 
         <label for="desc">Description:</label>
-        <textarea id="desc" ng-model="vm.desc"></textarea>
-        <input type="submit" value="Add">
-        <!--///////////////ng-click="vm.addTodo"-->
-        <input type="reset" value="Reset">
-        <input type="button" value="Cancel">
-        <!--/////////ng-click="vm.cancel-->
+        <input type="text" id="desc" ng-model="vm.desc">
+
+        <input class="button" type="submit" value="Add" ng-click="vm.addTodo()">
+        <input class="button" type="reset" value="Reset">
+
     </form>
 </div>

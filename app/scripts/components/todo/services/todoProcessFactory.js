@@ -2,13 +2,15 @@
 angular.module('app')
        .factory('TodoProcessFactory',todoProcessFactory);
 
-todoProcessFactory.$inject = ['TodoFormatFactory'];
+todoProcessFactory.$inject = ['TodoFormatFactory','$log'];
 
-function todoProcessFactory(todoFormat) {
+function todoProcessFactory(todoFormat,$log) {
     var service = {};
     service.getTodoList = getTodoList;
     service.addNewTodo = addNewTodo;
     service.registerUpdateListener = registerUpdateListener;
+    service.deleteTodo = deleteTodo;
+    service.editTodo = editTodo;
     var listeners = [];
     service.ACTIONS = {
         UPDATE: "update"
@@ -33,9 +35,7 @@ function todoProcessFactory(todoFormat) {
         listeners.push(obj);
     }
 
-    function addNewTodo(newTodo) {
-        var newTodos =  todoFormat.generateTodo([newTodo]);
-        updateCache(newTodos);
+    function updateListeners() {
         listeners.forEach(function (value) {
             if(value.hasOwnProperty("update")){
                 value.update();
@@ -43,13 +43,76 @@ function todoProcessFactory(todoFormat) {
         })
     }
 
+    function addNewTodo(newTodo) {
+        var oldTodo = JSON.parse(localStorage.getItem("todo"));
+        var length = oldTodo.pre.complete.length +  oldTodo.pre.incomplete.length;
+        length += oldTodo.post.complete.length +  oldTodo.post.incomplete.length;
+        var newTodo =  todoFormat.generateTodo(newTodo,oldTodo+1);
+        updateCache(newTodo);
+        updateListeners();
+
+    }
+    function editTodo(beforeAfter,type,id) {
+        var values = prompt("Enter Separated Values");
+        var newTitle = values.substr(0,values.indexOf(" "));
+        values = values.substr(values.indexOf(" ")+1);
+        var newdate =  new Date(values.substr(0,values.indexOf(" ")));
+        values = values.substr(values.indexOf(" ")+1);
+        var newDesc =  values;
+
+        var oldTodo = JSON.parse(localStorage.getItem("todo"));
+        for(var i=0;i<oldTodo[beforeAfter][type].length;i++){
+            if(oldTodo[beforeAfter][type][i].id === id){
+                oldTodo[beforeAfter][type][i].title = newTitle;
+                oldTodo[beforeAfter][type][i].date = newdate;
+                oldTodo[beforeAfter][type][i].desc = newDesc;
+                oldTodo = (oldTodo.pre.complete).concat(oldTodo.pre.incomplete).
+                    concat(oldTodo.post.complete).concat(oldTodo.post.incomplete);
+                oldTodo = todoFormat.wrapInTodo(oldTodo);
+                oldTodo = todosType(oldTodo);
+                localStorage.setItem("todo",JSON.stringify(oldTodo));
+                break;
+            }
+        }
+        updateListeners();
+    }
+
+    function deleteTodo(pre_past,compl_inc,id) {
+        var oldTodo = JSON.parse(localStorage.getItem("todo"));
+        for(var i = 0; i< oldTodo[pre_past][compl_inc].length;i++){
+            if(oldTodo[pre_past][compl_inc][i].id === id){
+                oldTodo[pre_past][compl_inc].splice([i],1);
+                localStorage.setItem("todo",JSON.stringify(oldTodo));
+            }
+        }
+        updateListeners();
+    }
+
+
     function createCache(todos) {
         localStorage.setItem("todo",JSON.stringify(todos));
     }
 
-    function updateCache(newTodos) {
+    function updateCache(newTodo) {
         var arr_todo = JSON.parse(localStorage.getItem("todo"));
-        arr_todo =  arr_todo.concat(newTodos);
+
+        if(newTodo.isPastDate()){
+            if(newTodo.isCompleted()){
+                arr_todo.post.complete.push(newTodo);
+            }
+            else{
+                arr_todo.post.incomplete.push(newTodo);
+            }
+        }
+        else{
+            if(newTodo.isCompleted()){
+                arr_todo.pre.complete.push(newTodo);
+            }
+            else{
+                arr_todo.pre.complete.push(newTodo);
+            }
+        }
+        $log.log(arr_todo);
         localStorage.setItem("todo",JSON.stringify(arr_todo));
     }
 
