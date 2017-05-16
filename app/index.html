@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="build/styles/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="build/styles/css/bootstrap.min.css">
     <link rel="stylesheet" href="build/styles/style.css">
-    <title>ToDoApp</title>
 </head>
 <body ng-app="app" ng-strict-di>
 
-<div ng-controller="MainController as vm">
-    <div ui-view="">
+    <nav-bar></nav-bar>
 
-            <login-page></login-page>
-
+    <div>
+        <user-list></user-list>
     </div>
-</div>
 
+    <footer class="panel panel-default">
+        <div class="panel-body">
+            Copyright&copy; To The New
+        </div>
+    </footer>
 
 <script src="build/bundle.js"></script>
 </body>

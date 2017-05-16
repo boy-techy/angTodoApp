@@ -1,14 +1,5 @@
-var todoroutes = require("./scripts/components/todo/todoroutes");
-var loginRoutes = require("./scripts/components/Login/loginRoutes");
-function routerConfigurations(locationProvider,stateProvider,urlRouterProvider) {
-    locationProvider.html5Mode({
-        enabled: true,
-        requireBase:false
-    })
 
-    loginRoutes(stateProvider);
-
-    todoroutes(stateProvider);
-}
-
-module.exports = routerConfigurations;
+require("./app.config");
+require("scripts/component/home/directives");
+require("scripts/component/home/services");
+require("scripts/component/home/controllers");

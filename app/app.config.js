@@ -1,15 +1,13 @@
-var angular = require('angular');
-require('angular-ui-router');
-var app = angular.module('app',['ui.router']);
 
-var routerConfigurations =  require('./app.route');
+var angular = require("angular");
+require("angular-ui-bootstrap");
 
-routeConfig.$inject = ['$logProvider','$locationProvider','$stateProvider','$urlRouterProvider'];
+var app = angular.module("app",["ui.bootstrap"]);
 
-app.config(routeConfig)
+configurations.$inject = ["$logProvider"];
 
-function routeConfig(logProvider,locationProvider,stateProvider,urlRouterProvider){
+app.config(configurations);
+
+function configurations(logProvider) {
     logProvider.debugEnabled(true);
-    routerConfigurations(locationProvider,stateProvider,urlRouterProvider);
 }
-
