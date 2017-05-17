@@ -5,8 +5,10 @@ angular.module("app")
 formatFactory.$inject = ["UserProducerFactory","$log"];
 
 function formatFactory(UserProducerFactory,log) {
-    var service = {};
+    var service = {},
+        cache = "";
     service.userData = userData;
+    service.returnCache = returnCache;
     return service;
 
     /////////////////////////////////
@@ -15,19 +17,24 @@ function formatFactory(UserProducerFactory,log) {
             .getRawUsers()
             .then(function (rawData) {
                 var temp = wrapInUser(rawData);
+                cache = temp;
                 log.debug("Format Factory Data:-----------",temp);
                 return temp;
             })
     }
 
+    function returnCache() {
+        return cache;
+    }
+
     function wrapInUser(rawData) {
-        var usersList =  rawData.map(function (userData) {
-            return new User(userData);
-        })
-        return usersList;
+        return rawData.map(function (userData,index) {
+            return new User(userData,index);
+        });
     }
 }
-function User(rawData) {
+function User(rawData,index) {
+    this.id = index;
     this.user = rawData.user;
     this.todo = makeTodos(rawData.todo);
 }
@@ -38,8 +45,7 @@ function makeTodos(rawTodo) {
         wrappedTodos.push(new Todo(todo))
     });
 
-    var filtered =  filterTodo(wrappedTodos);
-    return filtered;
+    return filterTodo(wrappedTodos);
 }
 
 function filterTodo(todos) {

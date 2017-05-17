@@ -2,17 +2,37 @@
 angular.module("app")
         .controller("UserListController",userListController);
 
-userListController.$inject = ["$log","UserProcessorFactory"];
+userListController.$inject = ["$log","UserProcessorFactory","CONTROLLER","ACTION"];
 
-function userListController(log, UserProcessorFactory) {
+function userListController(log, UserProcessorFactory,CONTROLLER,ACTION) {
     var vm = this;
     vm.loadMore = loadMore;
     vm.loadMoreDisable = false;
+
+    var cache = "",
+        loadCount = 3;
+
     init();
     
     /////////////////////////////////////////////
-    var cache = "",
-        loadCount = 3;
+    function init() {
+        registerControllerCallbacks();
+        initialView();
+    }
+
+    function registerControllerCallbacks() {
+        UserProcessorFactory.registerListeners({
+            action: ACTION.LOGIN,
+            controller: CONTROLLER.USERLIST,
+            callback: update_LoginView
+        });
+    }
+
+    function update_LoginView() {
+        log.debug("HomePage------ Not this time but Can be used for Change Profile");
+        ////UPdate View After Login
+    }
+
     function loadMore() {
         if((loadCount+3) < cache.length){
             loadCount += 3;
@@ -25,7 +45,7 @@ function userListController(log, UserProcessorFactory) {
         }
     }
 
-    function init() {
+    function initialView() {
         UserProcessorFactory
             .getUsers()
             .then(function (users) {

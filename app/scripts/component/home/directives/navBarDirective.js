@@ -5,6 +5,8 @@ angular.module("app")
 function navBar() {
     return{
         restrict: 'E',
-        templateUrl: "scripts/component/home/views/navbar.html"
+        templateUrl: "scripts/component/home/views/navbar.html",
+        controller: "NavBarController",
+        controllerAs: "vm"
     }
 }

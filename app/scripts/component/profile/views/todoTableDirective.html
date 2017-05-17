@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="table-responsive" style="color: white">
+        <table class="table">
+            <caption>{{type}}</caption>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Desc</th>
+                <th colspan="2">Operations</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="todo in todos track by $index">
+                <td>{{$index+1}}</td>
+                <td><input type="checkbox" checked={{todo.status}}></td>
+                <td>{{todo.title}}</td>
+                <td>{{todo.date}}</td>
+                <td>{{todo.desc}}</td>
+                <td><input type="button" value="Edit"></td>
+                <td><input type="button" value="Delete"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

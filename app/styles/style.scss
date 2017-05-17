@@ -1,3 +1,63 @@
+body{
+  background: url("../background.jpg") fixed no-repeat;
+}
+.nav_bar{
+  display: block;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+}
+.viewContainer{
+  padding: 50px 0;
+  user-list{
+    display: block;
+  }
+  .profile-pic{
+    border-radius: 50%;
+    height: 100px;
+  }
+  .userContainer{
+    >div{
+      margin-bottom: 20px;
+      padding: 20px 0;
+    }
+    >div:nth-child(even){
+      background-color: rgba(101,175,233,0.5);
+    }
+    >div:nth-child(odd){
+      background-color: rgba(43,102,154,0.5);
+    }
+    .complete,.incomplete{
+      height: 16vh;
+      font: {
+        size: 4vh;
+      };
+      span{
+        text-align: center;
+        display: inherit;
+        color: white;
+        text-decoration: underline;
+
+      }
+    }
+    .complete{
+      border-right: 2px solid black;
+      color: whitesmoke;
+    }
+    .incomplete{
+      color: orangered;
+    }
+    .loadMore{
+      text-align: right;
+      margin-right: 10vw;
+      background-color: transparent !important;
+    }
+
+  }
+}
+
+
+
 footer{
   bottom: 0;
   margin: 0!important;
@@ -7,3 +67,5 @@ footer{
   background-color: black !important;
   color: white;
 }
+
+

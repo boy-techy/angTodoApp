@@ -1,5 +1,14 @@
 
-require("./app.config");
-require("scripts/component/home/directives");
-require("scripts/component/home/services");
-require("scripts/component/home/controllers");
+var homeRoutes = require("../app/scripts/component/home/homeroutes");
+
+function routers(locationProvider, stateProvider, urlRouterProvider) {
+
+    locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+    });
+
+    homeRoutes(stateProvider);
+}
+
+module.exports = routers;
