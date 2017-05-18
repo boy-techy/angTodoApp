@@ -1,6 +1,16 @@
 body{
   background: url("../background.jpg") fixed no-repeat;
 }
+.loginContainer{
+  .modal.in{
+    .modal-dialog{
+      position: absolute;
+      top: 13%;
+      left: 28%;
+    }
+  }
+}
+
 .nav_bar{
   display: block;
   position: fixed;

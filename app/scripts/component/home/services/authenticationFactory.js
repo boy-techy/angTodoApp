@@ -5,26 +5,37 @@ angular.module("app")
 authenticationFactory.$inject = ["FormatFactory","UserProcessorFactory"];
 
 function authenticationFactory(FormatFactory,UserProcessorFactory) {
-    var service = {};
+    var service = {},
+        LoggedInuser = "";
     service.authenticateUser = authenticateUser;
+    service.logOutUser = logOutUser;
+    service.getLoggedInUserId = getLoggedInUserId;
     return service;
 
     //////////////////////////////////////
     function authenticateUser(LoginCredentials) {
         var users = FormatFactory.returnCache();
-        var LoggedInuser =  users.filter(function (user) {
-            return (user.user === LoginCredentials.username && user.user === user.password);
+        LoggedInuser =  users.filter(function (user) {
+            return (user.user === LoginCredentials.username && user.user === LoginCredentials.password);
         });
         if(LoggedInuser.length > 0){
-            LoggedInuser = LoggedInuser[0].user;
-            updateListeners(LoggedInuser);
+            LoggedInuser = LoggedInuser[0];
+            updateListeners(LoggedInuser,"loginViewUpdate");
         }
         else{
             /////Message For Toaster Not User Existing
         }
     }
     
-    function updateListeners(LoggedInuser) {
-        UserProcessorFactory.loginViewUpdate(LoggedInuser);
+    function logOutUser() {
+        updateListeners({},"logoutViewUpdate");
+    }
+
+    function getLoggedInUserId() {
+        return LoggedInuser.id;
+    }
+    
+    function updateListeners(LoggedInuser,action) {
+        UserProcessorFactory[action](LoggedInuser);
     }
 }

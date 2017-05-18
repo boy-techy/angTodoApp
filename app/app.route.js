@@ -8,6 +8,14 @@ function routers(locationProvider, stateProvider, urlRouterProvider) {
         requireBase: false
     });
 
+    stateProvider
+        .state("/",{
+            url: "/",
+            templateUrl: "scripts/component/home/views/userList.html",
+            controller: 'UserListController',
+            controllerAs: "vm"
+        });
+
     homeRoutes(stateProvider);
 }
 

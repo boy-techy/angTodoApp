@@ -9,7 +9,8 @@ function userProfileDirective() {
         controller: "UserProfileController",
         controllerAs: "vm",
         scope:{
-            profile: '='
+            profile: '=',
+            authentic: '='
         }
     }
 }

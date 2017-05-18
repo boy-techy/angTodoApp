@@ -1,9 +1,8 @@
 
 var angular = require("angular");
 require("angular-ui-router");
-require("angular-ui-bootstrap");
 
-var app = angular.module("app",["ui.bootstrap","ui.router"]);
+var app = angular.module("app",["ui.router"]);
 
 var routers =  require("./app.route");
 

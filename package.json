@@ -15,7 +15,6 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "angular-ui-bootstrap": "^2.5.0",
     "browserify": "^14.3.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",

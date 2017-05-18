@@ -11,7 +11,8 @@ function todoDirective() {
         controller: "TodoController",
         controllerAs: "vm",
         scope:{
-            todos: '='
+            todos: '=',
+            authentic: '='
         }
     }
 }

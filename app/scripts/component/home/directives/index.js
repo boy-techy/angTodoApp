@@ -1,5 +1,5 @@
 
 
 require("./navBarDirective");
-require("./userListDirective");
 require("./userDirective");
+require("./loginDirective");

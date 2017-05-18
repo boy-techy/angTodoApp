@@ -8,7 +8,8 @@ function todoTableDirective() {
         templateUrl: "../scripts/component/profile/views/todoTableDirective.html",
         scope:{
             type: '@',
-            todos: '='
+            todos: '=',
+            authentic: '='
         }
     }
 }

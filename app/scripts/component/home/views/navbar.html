@@ -4,10 +4,17 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">TodoApp</a>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Sign Up</a></li>
-            </ul>
+            <div ng-if="vm.authentic === true">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" ng-click="vm.logout()">Logout</a></li>
+                </ul>
+            </div>
+            <div ng-if ="vm.authentic === false">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" data-toggle="modal" data-target="#loginModal">Login</a></li>
+                    <li><a href="#">Sign Up</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 </header>

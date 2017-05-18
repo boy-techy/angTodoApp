@@ -10,6 +10,7 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
     service.getUsers = getUsers;
     service.registerListeners = registerListeners;
     service.updateListeners = updateListeners;
+    service.logoutViewUpdate = logoutViewUpdate;
     service.loginViewUpdate = loginViewUpdate;
     return service;
 
@@ -45,13 +46,16 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
     function loginViewUpdate(LoggedInuser) {
         var getCurr_User_IdCallback =  listeners.filter(function (listener) {
             return listener.action === ACTION.CURRENTUSER;
-        })
-        var currnet_user_id = getCurr_User_IdCallback[0].callback();
+        });
+        var currnet_user_id = [];
+        if(getCurr_User_IdCallback.length > 0){
+            currnet_user_id = getCurr_User_IdCallback[0].callback(true);
+        }
 
         if(LoggedInuser.id === currnet_user_id){
             listeners.forEach(function (listener) {
                 if(listener.action === ACTION.LOGIN){
-                    listener.callback();
+                    listener.callback(true);
                 }
             })
         }
@@ -59,17 +63,25 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
             listeners.forEach(function (listener) {
                 if(listener.action === ACTION.LOGIN && listener.controller === CONTROLLER.NAVBAR){
 
-                    listener.callback();
+                    listener.callback(true);
                 }
             })
         }
+    }
+
+    function logoutViewUpdate(LogoutUser) {
+        listeners.forEach(function (listener) {
+            if(listener.action === ACTION.LOGOUT){
+                listener.callback(false);
+            }
+        })
     }
 
 }
 function Listener(listener) {
     this.action = listener.action;
     this.controller = listener.controller;
-    this.callback = callback;
+    this.callback = listener.callback;
 }
 
 Listener.prototype.equalsTo = function (newListener) {

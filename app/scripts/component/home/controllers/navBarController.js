@@ -3,15 +3,17 @@ angular.module("app")
         .controller("NavBarController",navBarController);
 
 navBarController.$inject = ["$log","AuthenticationFactory","UserProcessorFactory",
-                               "CONTROLLER","ACTION", "state"];
+                               "CONTROLLER","ACTION", "$state"];
 
 function navBarController(log,AuthenticationFactory,UserProcessorFactory,CONTROLLER,ACTION ,state) {
     var vm = this;
     vm.authenticate = authenticate;
+    vm.logout = logout;
     init();
     
     ////////////////////////////////////////////////////
     function init() {
+        vm.authentic = false;
         registerControllerCallbacks();
     }
 
@@ -21,12 +23,23 @@ function navBarController(log,AuthenticationFactory,UserProcessorFactory,CONTROL
             controller: CONTROLLER.NAVBAR,
             callback: updateView
         });
+
+        UserProcessorFactory.registerListeners({
+            action: ACTION.LOGOUT,
+            controller: CONTROLLER.NAVBAR,
+            callback: updateView
+        })
     }
 
-    function updateView() {
-        //state.go something something
-        log.debug("Login Successfully----- Message From Navbar");
+    function updateView(value) {
+        log.debug("Login Successfully----- Message From Navbar",value);
+        vm.authentic = value;
         /// have to Update View Login to Logout
+    }
+
+    function logout() {
+        ////Have to do task for
+        AuthenticationFactory.logOutUser();
     }
 
     function authenticate() {

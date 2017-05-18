@@ -8,7 +8,6 @@ userDashBoardController.$inject = ["$stateParams","$log","ProfileFilterFactory",
 function userDashBoardController(stateParams,log,ProfileFilterFactory,
                                  UserProcessorFactory,CONTROLLER,ACTION) {
     var vm = this;
-
     init();
 
     /////////////////////////////////////
@@ -16,6 +15,8 @@ function userDashBoardController(stateParams,log,ProfileFilterFactory,
         registerForGetCurrentUser();
         initialView();
     }
+
+
 
     function registerForGetCurrentUser() {
         UserProcessorFactory.registerListeners({
@@ -29,20 +30,28 @@ function userDashBoardController(stateParams,log,ProfileFilterFactory,
             controller: CONTROLLER.USERDASHBOARD,
             callback: updateView
         });
+
+        UserProcessorFactory.registerListeners({
+            action: ACTION.LOGOUT,
+            controller: CONTROLLER.USERDASHBOARD,
+            callback: updateView
+        })
     }
 
     function getId() {
         return vm.user.id;
     }
 
-    function updateView() {
+    function updateView(value) {
         log.debug("UserDashBoard---- Now Update View For Edit Delete and all this Stuff");
+        vm.authentic = value;
         ////Have to work
     }
 
     function initialView() {
-        var id = stateParams.id;
-        vm.user =  ProfileFilterFactory.getProfile(parseInt(id));
+        var id = parseInt(stateParams.id);
+        vm.user =  ProfileFilterFactory.getProfile(id);
+        vm.authentic = ProfileFilterFactory.isSameUser(id);
         log.debug("Profile--------------",vm.user);
     }
 
