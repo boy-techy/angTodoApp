@@ -1,19 +1,16 @@
 <div class="profile-container">
+    <div>
+        <img src="/build/profile.jpg" alt="User Profile Image"
+             class="img-circle img-thumbnail profilepic">
+    </div>
 
-    <div class="profile-pic">
-        <img src="" alt="User Profile Image"
-             class="img-responsive img-circle img-thumbnail">
-    </div>
-    <div>
+    <div class="detail">
         <p>Name: <span>{{profile.user}}</span></p>
-    </div>
-    <div>
         <p>Competency:<span>{{profile.competency}}</span></p>
-    </div>
-    <div>
         <p>Date Of Birth:<span>{{profile.dob}}</span></p>
-    </div>
-    <div ng-if = "authentic === true">
-        <input type="button" class="btn btn-success btn-lg pull-right" value="Edit">
+
+        <div ng-if = "authentic === true" class="editbutton">
+            <span class="pull-right glyphicon glyphicon-pencil"></span>
+        </div>
     </div>
 </div>

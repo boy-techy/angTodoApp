@@ -12,6 +12,8 @@ function todoDirective() {
         controllerAs: "vm",
         scope:{
             todos: '=',
+            userid: '=',
+            type: '@',
             authentic: '='
         }
     }

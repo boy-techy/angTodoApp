@@ -26,6 +26,12 @@ function userDashBoardController(stateParams,log,ProfileFilterFactory,
         });
 
         UserProcessorFactory.registerListeners({
+            action: ACTION.DELETE,
+            controller: CONTROLLER.USERDASHBOARD,
+            callback: updateDeleteView
+        })
+
+        UserProcessorFactory.registerListeners({
             action: ACTION.LOGIN,
             controller: CONTROLLER.USERDASHBOARD,
             callback: updateView
@@ -39,19 +45,27 @@ function userDashBoardController(stateParams,log,ProfileFilterFactory,
     }
 
     function getId() {
-        return vm.user.id;
+        
     }
 
-    function updateView(value) {
+    function updateDeleteView() {
+        var id = parseInt(stateParams.id);
+        log.debug("UpdateDeleteView :",id);
+        vm.user = ProfileFilterFactory.getProfile(id);
+    }
+
+
+    function updateView() {
         log.debug("UserDashBoard---- Now Update View For Edit Delete and all this Stuff");
-        vm.authentic = value;
-        ////Have to work
+        var loggedInuser = JSON.parse(localStorage.getItem("loggedInuser"));
+        vm.authentic = (loggedInuser.authentic && loggedInuser.id === vm.user.id);
     }
 
     function initialView() {
         var id = parseInt(stateParams.id);
         vm.user =  ProfileFilterFactory.getProfile(id);
-        vm.authentic = ProfileFilterFactory.isSameUser(id);
+        var loggedInuser = JSON.parse(localStorage.getItem("loggedInuser"));
+        vm.authentic = (loggedInuser.authentic && loggedInuser.id === id);
         log.debug("Profile--------------",vm.user);
     }
 

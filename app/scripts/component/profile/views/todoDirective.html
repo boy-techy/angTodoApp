@@ -1,9 +1,9 @@
-<div class="container">
-    <div class="row">
-        <todo-table type="complete" authentic="authentic" todos = "todos.complete"></todo-table>
-    </div>
-    <div class="row">
-        <todo-table type="incomplete" authentic="authentic" todos = "todos.incomplete"></todo-table>
-    </div>
+<div class="row">
+    {{userid}}
+    <todo-table userid="userid" type="complete" authentic="authentic" todos = "todos.complete"></todo-table>
+</div>
+<div class="row">
+    {{userid}}
+    <todo-table userid= "userid" type="incomplete" authentic="authentic" todos = "todos.incomplete"></todo-table>
 </div>
 

@@ -1,12 +1,58 @@
 body{
   background: url("../background.jpg") fixed no-repeat;
+  background-size: cover;
+  box-shadow: inset 0 0 490px #000;
 }
+
 .loginContainer{
+  .modal-dialog{
+    max-width: 448px;
+    max-height: 198px;
+    width: 100%;
+    height: 100%;
+  };
+  .modal-content{
+    background: #EB5757;
+    background: -webkit-linear-gradient(to right, #000000, #EB5757);
+    background: linear-gradient(to right, #000000, #EB5757);
+    color: white;
+  };
+  .modal-header{
+    text-align: center;
+    border: none;
+    padding: 7px;
+  }
   .modal.in{
     .modal-dialog{
       position: absolute;
-      top: 13%;
-      left: 28%;
+      top: 13vh;
+      left: 15vw;
+    }
+    .title{
+      text-align: center;
+    }
+  }
+  .modal-body {
+    text-align: center;
+    input{
+      width: 80%;
+      outline: transparent;
+      padding: 10px;
+      font-size: 14px;
+      margin-bottom: 25px;
+      border: 0;
+      border-bottom: 1px solid white;
+      background: transparent;
+      text-align: center;
+    }
+    input[type="button"]{
+      width: 30%;
+      color: white;
+      font-size: 17px;
+      margin-bottom: 0;
+      border: 3px solid white;
+      background-color: #155799;
+      text-align: center;
     }
   }
 }
@@ -16,17 +62,51 @@ body{
   position: fixed;
   width: 100%;
   z-index: 2;
+  nav{
+    margin: 0;
+  }
+  .navbar-brand{
+    font:{
+      size: 30px;
+      weight: bold;
+    };
+  }
+  .navbar-right{
+    color: white;
+    li{
+      &:hover{
+        background-color: rgba(43,102,154,.5);
+      }
+      a{
+        font:{
+          size: 20px;
+          weight: bold;
+        };
+        border: 0;
+        color: white !important;
+        background: black;
+      }
+    }
+  }
 }
-.viewContainer{
-  padding: 50px 0;
-  user-list{
-    display: block;
-  }
-  .profile-pic{
-    border-radius: 50%;
-    height: 100px;
-  }
+
+.mainContainer{
+  box-shadow: inset 0 0 490px black;
+  padding: 60px 0;
+  height: 100vh;
   .userContainer{
+    .user{
+      margin: 0;
+      >div:nth-of-type(1){
+        padding: 0 0 0 30px;
+        display: inline-block;
+        float: left;
+      }
+    }
+    .profile-pic{
+      border-radius: 50%;
+      height: 100px;
+    }
     >div{
       margin-bottom: 20px;
       padding: 20px 0;
@@ -40,7 +120,7 @@ body{
     .complete,.incomplete{
       height: 16vh;
       font: {
-        size: 4vh;
+        size: 16px;
       };
       span{
         text-align: center;
@@ -62,10 +142,61 @@ body{
       margin-right: 10vw;
       background-color: transparent !important;
     }
-
   }
 }
 
+.dashboard{
+  margin: 0;
+  .profile-container{
+    >div:nth-of-type(1){
+      position: relative;
+      top: 15px;
+      text-align: center;
+    }
+    .profilepic{
+      max-width: 150px
+    };
+
+    .detail{
+      text-align: center;
+      padding: 30px 0;
+      color: #000;
+      background-color: #fff;
+      p{
+        font-size: 23px;
+        margin: 0 0 10px;
+      }
+    }
+    .editbutton{
+      position: relative;
+      top: -170px;
+      right: -13px;
+      span{
+        font-size: 30px;
+      }
+    }
+  }
+  to-do{
+    display: block;
+    margin-left: 15px;
+    caption{
+      font-size: 35px;
+      text-align: center;
+      text-orientation: sideways;
+      text-transform: capitalize;
+      color: white;
+    }
+    tr{
+      font-size: 18px;
+      &:nth-child(even){
+        background-color: rgba(0,134,179,0.4);
+      }
+      &:nth-child(odd){
+        background-color: rgba(21,27,153,0.4);
+      }
+    }
+  }
+}
 
 
 footer{

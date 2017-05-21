@@ -1,11 +1,9 @@
-<div class="viewContainer" style="color: white">
-    <div class="row">
-        <div class="col-xs-3">
-            <user-profile profile = "vm.user" authentic="vm.authentic"></user-profile>
-        </div>
-        <div class="col-xs-9">
-            <to-do todos = "vm.user.todo" authentic="vm.authentic"></to-do>
-        </div>
+<div class="row dashboard">
+    <div class="col-xs-3">
+        <user-profile profile = "vm.user" authentic="vm.authentic"></user-profile>
     </div>
-
+    <div class="col-xs-9">
+        {{vm.user.id}}
+        <to-do todos = "vm.user.todo" userid = "vm.user.id" authentic="vm.authentic"></to-do>
+    </div>
 </div>

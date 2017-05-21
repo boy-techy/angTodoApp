@@ -16,3 +16,15 @@ function configurations(logProvider,locationProvider,stateProvider,urlRouterProv
     logProvider.debugEnabled(true);
     routers(locationProvider,stateProvider,urlRouterProvider);
 }
+
+app.run(function () {
+    localStorage.clear();
+    var loggedInuser = {
+        authentic: false,
+        id: 0
+    };
+
+    Object.freeze(loggedInuser);
+
+    localStorage.setItem("loggedInuser",JSON.stringify(loggedInuser));
+});

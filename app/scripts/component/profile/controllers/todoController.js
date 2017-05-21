@@ -2,9 +2,10 @@
 angular.module("app")
         .controller("TodoController",todoController);
 
-function todoController() {
+todoController.$inject = ["$log"];
+
+function todoController(log) {
     var vm = this;
-    
     init();
     
     //////////////////////////////////////

@@ -2,7 +2,9 @@
 var ACTION = {
     LOGIN: "authenticate",
     CURRENTUSER: "currentUser",
-    LOGOUT: "logout"
+    LOGOUT: "logout",
+    EDIT: "editTodo",
+    DELETE: "deleteTodo"
 }
 
 angular.module("app")

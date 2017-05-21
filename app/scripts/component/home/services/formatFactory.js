@@ -8,6 +8,7 @@ function formatFactory(UserProducerFactory,log) {
     var service = {},
         cache = "";
     service.userData = userData;
+    service.updateCache = updateCache;
     service.returnCache = returnCache;
     return service;
 
@@ -21,6 +22,10 @@ function formatFactory(UserProducerFactory,log) {
                 log.debug("Format Factory Data:-----------",temp);
                 return temp;
             })
+    }
+
+    function updateCache(newCache){
+        cache = newCache;
     }
 
     function returnCache() {
@@ -41,8 +46,8 @@ function User(rawData,index) {
 
 function makeTodos(rawTodo) {
     var wrappedTodos = [];
-    rawTodo.forEach(function (todo) {
-        wrappedTodos.push(new Todo(todo))
+    rawTodo.forEach(function (todo,index) {
+        wrappedTodos.push(new Todo(todo,index))
     });
 
     return filterTodo(wrappedTodos);
@@ -66,7 +71,8 @@ function filterTodo(todos) {
     return todo;
 }
 
-function Todo(raw) {
+function Todo(raw,index) {
+    this.index = index;
     this.title = raw.title;
     this.date = raw.date;
     this.desc = raw.desc;

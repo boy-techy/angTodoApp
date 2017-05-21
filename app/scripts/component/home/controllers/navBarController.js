@@ -13,8 +13,9 @@ function navBarController(log,AuthenticationFactory,UserProcessorFactory,CONTROL
     
     ////////////////////////////////////////////////////
     function init() {
-        vm.authentic = false;
         registerControllerCallbacks();
+        var loggedInuser = JSON.parse(localStorage.getItem("loggedInuser"));
+        vm.authentic = loggedInuser.authentic;
     }
 
     function registerControllerCallbacks() {
@@ -31,10 +32,12 @@ function navBarController(log,AuthenticationFactory,UserProcessorFactory,CONTROL
         })
     }
 
-    function updateView(value) {
-        log.debug("Login Successfully----- Message From Navbar",value);
-        vm.authentic = value;
-        /// have to Update View Login to Logout
+    function updateView() {
+        log.debug("Login Successfully----- Message From Navbar");
+
+        var loggedInuser = JSON.parse(localStorage.getItem("loggedInuser"));
+        vm.authentic = loggedInuser.authentic;
+
     }
 
     function logout() {

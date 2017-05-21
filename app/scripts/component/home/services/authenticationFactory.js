@@ -2,14 +2,13 @@
 angular.module("app")
         .factory("AuthenticationFactory",authenticationFactory);
 
-authenticationFactory.$inject = ["FormatFactory","UserProcessorFactory"];
+authenticationFactory.$inject = ["$log","FormatFactory","UserProcessorFactory"];
 
-function authenticationFactory(FormatFactory,UserProcessorFactory) {
+function authenticationFactory(log,FormatFactory,UserProcessorFactory) {
     var service = {},
-        LoggedInuser = "";
+        LoggedInuser = [];
     service.authenticateUser = authenticateUser;
     service.logOutUser = logOutUser;
-    service.getLoggedInUserId = getLoggedInUserId;
     return service;
 
     //////////////////////////////////////
@@ -20,22 +19,36 @@ function authenticationFactory(FormatFactory,UserProcessorFactory) {
         });
         if(LoggedInuser.length > 0){
             LoggedInuser = LoggedInuser[0];
-            updateListeners(LoggedInuser,"loginViewUpdate");
+
+            var loggedInuser = {
+                authentic: true,
+                id: LoggedInuser.id
+            };
+
+            Object.freeze(loggedInuser);
+
+            localStorage.setItem("loggedInuser",JSON.stringify(loggedInuser));
+            updateListeners("loginViewUpdate");
         }
         else{
-            /////Message For Toaster Not User Existing
+            log.debug("Login Credentials Are Wrong!!!!!");
         }
     }
     
     function logOutUser() {
-        updateListeners({},"logoutViewUpdate");
+        var loggedInuser = {
+            authentic: false,
+            id: LoggedInuser.id
+        };
+
+        Object.freeze(loggedInuser);
+
+        localStorage.setItem("loggedInuser",JSON.stringify(loggedInuser));
+
+        updateListeners("logoutViewUpdate");
     }
 
-    function getLoggedInUserId() {
-        return LoggedInuser.id;
-    }
-    
-    function updateListeners(LoggedInuser,action) {
-        UserProcessorFactory[action](LoggedInuser);
+    function updateListeners(action) {
+        UserProcessorFactory[action]();
     }
 }

@@ -1,29 +1,45 @@
-<div class="container">
-    <div class="table-responsive" style="color: white">
-        <table class="table">
-            <caption>{{type}}</caption>
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Status</th>
-                <th>Title</th>
-                <th>Date</th>
-                <th>Desc</th>
-                <th colspan="2">Operations</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="todo in todos track by $index">
-                <td>{{$index+1}}</td>
-                <td><input type="checkbox" ng-model="todo.status" ng-init="todo.status"></td>
-                <td>{{todo.title}}</td>
-                <td>{{todo.date}}</td>
-                <td>{{todo.desc}}</td>
-                <td ng-if = "authentic === false" colspan="2">Actions</td>
-                <td ng-if = "authentic === true"><input type="button" value="Edit"></td>
-                <td ng-if = "authentic === true"><input type="button" value="Delete"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="table-responsive" style="color: white">
+    <table class="table">
+        <caption>{{type}}</caption>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Status</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Desc</th>
+            <th colspan="2">Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="todo in todos track by $index">
+            <td>{{$index+1}}</td>
+            <td><input type="checkbox" ng-model="todo.status" ng-init="todo.status"></td>
+            <td>{{todo.title}}</td>
+            <td>{{todo.date}}</td>
+            <td>{{todo.desc}}</td>
+            <td ng-if = "authentic === false" colspan="2">Actions</td>
+            <td ng-if = "authentic === true">
+                <span class="pull-right glyphicon glyphicon-pencil" ng-click="vm.editTodo()"></span>
+            </td>
+            <td ng-if = "authentic === true">
+                <span class="pull-right glyphicon glyphicon-trash" ng-click="vm.deleteTodo(userid,type,todo.index)"></span>
+            </td>
+        </tr>
+        <tr ng-if = "vm.editFlag == true" ng-repeat="todo in todos track by $index">
+            <td>{{$index+1}}</td>
+            <td><input type="checkbox" ng-model="todo.status" ng-init="todo.status"></td>
+            <td><input type="text" ng-init="todo.title" ng-model="vm.editTitle"></td>
+            <td><input type="text" ng-init="todo.title" ng-model="vm.editDate"></td>
+            <td><input type="text" ng-init="todo.title" ng-model="vm.editdesc"></td>
+            <td>
+                <span class="pull-right glyphicon glyphicon-pencil" ng-click="vm.updateTodo(todo.index, type)"></span>
+            </td>
+            <td>
+                <span class="pull-right glyphicon glyphicon-trash" ng-click="vm.cancelTodo()"></span>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
 </div>
