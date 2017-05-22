@@ -45,7 +45,7 @@ function userDashBoardController(stateParams,log,ProfileFilterFactory,
     }
 
     function getId() {
-        
+        return vm.user.id;
     }
 
     function updateDeleteView() {

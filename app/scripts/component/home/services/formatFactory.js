@@ -73,6 +73,7 @@ function filterTodo(todos) {
 
 function Todo(raw,index) {
     this.index = index;
+    this.editFlag = false;
     this.title = raw.title;
     this.date = raw.date;
     this.desc = raw.desc;

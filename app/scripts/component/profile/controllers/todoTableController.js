@@ -6,19 +6,23 @@ todoTableController.$inject = ["$log","UserProcessorFactory"];
 
 function todoTableController(log,UserProcessorFactory) {
     var vm = this;
-    vm.isEditable = isEditable;
+    vm.editFlag = [];
     vm.editTodo = editTodo;
     vm.deleteTodo = deleteTodo;
 
 
     /////////////////////////////////
-    function isEditable() {
-        vm.editFlag = true;
-        vm.isEditable = !vm.isEditable;
-    }
-
     function editTodo(index,type) {
-        isEdiTable();
+
+        vm.editFlag = vm.editFlag.map(function (list) {
+            if(list.index === index){
+                list.flag = !list.flag;
+                return list;
+            }
+            else{
+                return list;
+            }
+        });
     }
     function deleteTodo(userId,todoType,index) {
         log.debug("Values from delete Function: ",userId,index,todoType);

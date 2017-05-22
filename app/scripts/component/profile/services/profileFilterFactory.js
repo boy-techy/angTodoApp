@@ -7,7 +7,7 @@ profileFilterFactory.$inject = ["FormatFactory","AuthenticationFactory"];
 function profileFilterFactory(formatFactory,AuthenticationFactory) {
     var service = {};
     service.getProfile = getProfile;
-    service.isSameUser = isSameUser;
+    // service.isSameUser = isSameUser;
     return service;
     
     ////////////////////////

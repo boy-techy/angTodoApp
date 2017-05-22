@@ -36,7 +36,7 @@ function navBarController(log,AuthenticationFactory,UserProcessorFactory,CONTROL
         log.debug("Login Successfully----- Message From Navbar");
 
         var loggedInuser = JSON.parse(localStorage.getItem("loggedInuser"));
-        vm.authentic = loggedInuser.authentic;
+            vm.authentic = loggedInuser.authentic;
 
     }
 

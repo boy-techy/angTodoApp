@@ -10,6 +10,7 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
     service.getUsers = getUsers;
     service.registerListeners = registerListeners;
     service.deleteUserTodo = deleteUserTodo;
+    service.updateUserTodo = updateUserTodo;
     service.updateListeners = updateListeners;
     service.logoutViewUpdate = logoutViewUpdate;
     service.loginViewUpdate = loginViewUpdate;
@@ -26,15 +27,21 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
 
     function registerListeners(listener_to_register) {
         var newListener = new Listener(listener_to_register);
+        for(var i = 0;i<listeners.length;i++){
+            if(listeners[i].equalsTo(newListener)){
+                listeners[i] = newListener;
+                return;
+            }
+        }
         listeners.push(newListener);
-
+        return;
 
         ///deregister Listeners
-        return function () {
-            listeners =  listeners.filter(function (listener) {
-                return !(listener.equalsTo(newListener));
-            })
-        };
+        // return function () {
+        //     listeners =  listeners.filter(function (listener) {
+        //         return !(listener.equalsTo(newListener));
+        //     })
+        // };
     }
 
     function updateListeners(action) {
@@ -53,7 +60,7 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
 
         var currnet_user_id = NaN;
         if(getCurr_User_IdCallback.length > 0){
-            currnet_user_id = getCurr_User_IdCallback[0].callback();
+            currnet_user_id = getCurr_User_IdCallback[(getCurr_User_IdCallback.length)-1].callback();
         }
 
         //Notify all View Update Controllers
