@@ -6,3 +6,8 @@ Configurations:
   "express": "^4.15.2",
   "path": "^0.12.7"
   "angular-ui-bootstrap": "^2.5.0",
+  
+  
+  Changes in Pub/Sub:
+    Removed getId function that was violating the creating bidirectional flow.
+    in Controller Profile/ userDashBoardController

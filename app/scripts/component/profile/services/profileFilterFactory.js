@@ -2,23 +2,17 @@
 angular.module("app")
         .factory("ProfileFilterFactory",profileFilterFactory);
 
-profileFilterFactory.$inject = ["FormatFactory","AuthenticationFactory"];
+profileFilterFactory.$inject = ["FormatFactory"];
 
-function profileFilterFactory(formatFactory,AuthenticationFactory) {
+function profileFilterFactory(formatFactory) {
     var service = {};
     service.getProfile = getProfile;
-    // service.isSameUser = isSameUser;
     return service;
     
     ////////////////////////
     function getProfile(reqestedId) {
         var cache =  formatFactory.returnCache();
         return filterProfile(cache,reqestedId);
-    }
-
-    function isSameUser(id) {
-        var LoggedInUserId = AuthenticationFactory.getLoggedInUserId();
-        return (LoggedInUserId === id);
     }
 
     function filterProfile(cache,reqestedId) {

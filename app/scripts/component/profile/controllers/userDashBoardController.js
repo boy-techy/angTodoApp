@@ -20,12 +20,6 @@ function userDashBoardController(stateParams,log,ProfileFilterFactory,
 
     function registerForGetCurrentUser() {
         UserProcessorFactory.registerListeners({
-            action: ACTION.CURRENTUSER,
-            controller: CONTROLLER.USERDASHBOARD,
-            callback: getId
-        });
-
-        UserProcessorFactory.registerListeners({
             action: ACTION.DELETE,
             controller: CONTROLLER.USERDASHBOARD,
             callback: updateDeleteView
@@ -42,10 +36,6 @@ function userDashBoardController(stateParams,log,ProfileFilterFactory,
             controller: CONTROLLER.USERDASHBOARD,
             callback: updateView
         })
-    }
-
-    function getId() {
-        return vm.user.id;
     }
 
     function updateDeleteView() {

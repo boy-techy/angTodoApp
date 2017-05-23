@@ -53,33 +53,11 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
     }
 
     function loginViewUpdate() {
-        // /For get The Current User Which one Todo is Observing
-        var getCurr_User_IdCallback =  listeners.filter(function (listener) {
-            return listener.action === ACTION.CURRENTUSER;
-        });
-
-        var currnet_user_id = NaN;
-        if(getCurr_User_IdCallback.length > 0){
-            currnet_user_id = getCurr_User_IdCallback[(getCurr_User_IdCallback.length)-1].callback();
-        }
-
-        //Notify all View Update Controllers
-        var loggedInuser = JSON.parse(localStorage.getItem("loggedInuser"));
-
-        if(loggedInuser.id === currnet_user_id){
-            listeners.forEach(function (listener) {
-                if(listener.action === ACTION.LOGIN){
-                    listener.callback();
-                }
-            })
-        }
-        else{
-            listeners.forEach(function (listener) {
-                if(listener.action === ACTION.LOGIN && listener.controller === CONTROLLER.NAVBAR){
-                    listener.callback();
-                }
-            })
-        }
+        listeners.forEach(function (listener) {
+            if(listener.action === ACTION.LOGIN){
+                listener.callback();
+            }
+        })
     }
 
     function logoutViewUpdate() {

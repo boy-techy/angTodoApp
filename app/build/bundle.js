@@ -437,33 +437,11 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
     }
 
     function loginViewUpdate() {
-        // /For get The Current User Which one Todo is Observing
-        var getCurr_User_IdCallback =  listeners.filter(function (listener) {
-            return listener.action === ACTION.CURRENTUSER;
-        });
-
-        var currnet_user_id = NaN;
-        if(getCurr_User_IdCallback.length > 0){
-            currnet_user_id = getCurr_User_IdCallback[(getCurr_User_IdCallback.length)-1].callback();
-        }
-
-        //Notify all View Update Controllers
-        var loggedInuser = JSON.parse(localStorage.getItem("loggedInuser"));
-
-        if(loggedInuser.id === currnet_user_id){
-            listeners.forEach(function (listener) {
-                if(listener.action === ACTION.LOGIN){
-                    listener.callback();
-                }
-            })
-        }
-        else{
-            listeners.forEach(function (listener) {
-                if(listener.action === ACTION.LOGIN && listener.controller === CONTROLLER.NAVBAR){
-                    listener.callback();
-                }
-            })
-        }
+        listeners.forEach(function (listener) {
+            if(listener.action === ACTION.LOGIN){
+                listener.callback();
+            }
+        })
     }
 
     function logoutViewUpdate() {
@@ -638,12 +616,6 @@ function userDashBoardController(stateParams,log,ProfileFilterFactory,
 
     function registerForGetCurrentUser() {
         UserProcessorFactory.registerListeners({
-            action: ACTION.CURRENTUSER,
-            controller: CONTROLLER.USERDASHBOARD,
-            callback: getId
-        });
-
-        UserProcessorFactory.registerListeners({
             action: ACTION.DELETE,
             controller: CONTROLLER.USERDASHBOARD,
             callback: updateDeleteView
@@ -660,10 +632,6 @@ function userDashBoardController(stateParams,log,ProfileFilterFactory,
             controller: CONTROLLER.USERDASHBOARD,
             callback: updateView
         })
-    }
-
-    function getId() {
-        return vm.user.id;
     }
 
     function updateDeleteView() {
@@ -794,9 +762,9 @@ require("./profileFilterFactory");
 angular.module("app")
         .factory("ProfileFilterFactory",profileFilterFactory);
 
-profileFilterFactory.$inject = ["FormatFactory","AuthenticationFactory"];
+profileFilterFactory.$inject = ["FormatFactory"];
 
-function profileFilterFactory(formatFactory,AuthenticationFactory) {
+function profileFilterFactory(formatFactory) {
     var service = {};
     service.getProfile = getProfile;
     // service.isSameUser = isSameUser;
@@ -808,10 +776,14 @@ function profileFilterFactory(formatFactory,AuthenticationFactory) {
         return filterProfile(cache,reqestedId);
     }
 
-    function isSameUser(id) {
-        var LoggedInUserId = AuthenticationFactory.getLoggedInUserId();
-        return (LoggedInUserId === id);
-    }
+    // function isSameUser(id) {
+    //     var LoggedInUserId =
+    //     if(LoggedInUserId === id){
+    //         listeners.forEach(function (listener) {
+    //             listener.callback(true);
+    //         })
+    //     }
+    // }
 
     function filterProfile(cache,reqestedId) {
        var users = cache.filter(function (profile) {
