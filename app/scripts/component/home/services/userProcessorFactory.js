@@ -7,8 +7,11 @@ userProcessorFactory.$inject = ["FormatFactory","$log","CONTROLLER","ACTION"];
 function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
     var service = {},
         listeners = [];
+    var Listener = require("./../../shared/Classes/Listener");
     service.getUsers = getUsers;
+    service.addUserTodo = addUserTodo;
     service.registerListeners = registerListeners;
+    service.removeListeners = removeListeners;
     service.deleteUserTodo = deleteUserTodo;
     service.updateUserTodo = updateUserTodo;
     service.updateListeners = updateListeners;
@@ -27,21 +30,20 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
 
     function registerListeners(listener_to_register) {
         var newListener = new Listener(listener_to_register);
-        for(var i = 0;i<listeners.length;i++){
-            if(listeners[i].equalsTo(newListener)){
-                listeners[i] = newListener;
-                return;
-            }
-        }
+        // for(var i = 0;i<listeners.length;i++){
+        //     if(listeners[i].equalsTo(newListener)){
+        //         listeners[i] = newListener;
+        //         return;
+        //     }
+        // }
         listeners.push(newListener);
-        return;
+        console.log(listeners);
+    }
 
-        ///deregister Listeners
-        // return function () {
-        //     listeners =  listeners.filter(function (listener) {
-        //         return !(listener.equalsTo(newListener));
-        //     })
-        // };
+    function removeListeners(nameOfController) {
+        listeners = listeners.filter(function (listener) {
+            return (listener.controller !== nameOfController);
+        })
     }
 
     function updateListeners(action) {
@@ -50,6 +52,11 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
                 listener.callback();
             }
         })
+    }
+
+    function addUserTodo(newtodo,userid) {
+        FormatFactory.addUserTodo(newtodo,userid);
+        updateListeners(ACTION.ADDTODO);
     }
 
     function loginViewUpdate() {
@@ -118,13 +125,3 @@ function userProcessorFactory(FormatFactory,log,CONTROLLER,ACTION) {
     }
 
 }
-
-function Listener(listener) {
-    this.action = listener.action;
-    this.controller = listener.controller;
-    this.callback = listener.callback;
-}
-
-Listener.prototype.equalsTo = function (newListener) {
-    return (this.action === newListener.action && this.controller === newListener.controller);
-};

@@ -2,13 +2,12 @@
 angular.module("app")
         .controller("UserListController",userListController);
 
-userListController.$inject = ["$log","UserProcessorFactory","CONTROLLER","ACTION"];
+userListController.$inject = ["$log","$state","UserProcessorFactory","CONTROLLER","ACTION"];
 
-function userListController(log, UserProcessorFactory,CONTROLLER,ACTION) {
+function userListController(log,state,UserProcessorFactory,CONTROLLER,ACTION) {
     var vm = this;
     vm.loadMore = loadMore;
     vm.loadMoreDisable = false;
-
     var cache = "",
         loadCount = 3;
 
@@ -17,7 +16,14 @@ function userListController(log, UserProcessorFactory,CONTROLLER,ACTION) {
     /////////////////////////////////////////////
     function init() {
         registerControllerCallbacks();
+        stateUnMount();
         initialView();
+    }
+
+    function stateUnMount() {
+        state.$current.onExit = function () {
+            UserProcessorFactory.removeListeners(CONTROLLER.USERLIST);
+        }
     }
 
     function registerControllerCallbacks() {

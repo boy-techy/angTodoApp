@@ -5,8 +5,6 @@ angular.module("app")
 function loginDirective() {
     return{
         restrict: "E",
-        templateUrl: "scripts/component/home/views/login.html",
-        controller: "NavBarController",
-        controllerAs: "vm"
+        templateUrl: "scripts/component/home/views/login.html"
     }
 }

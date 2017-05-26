@@ -4,7 +4,8 @@ var CONTROLLERS = {
     USERLIST: "UserListController",
     TODO: "TodoController",
     USERDASHBOARD: "UserDashBoardController",
-    USERPROFILE: "UserProfileController"
+    USERPROFILE: "UserProfileController",
+    TODOCONTROLLER: "TodoController"
 };
 
 angular.module("app")

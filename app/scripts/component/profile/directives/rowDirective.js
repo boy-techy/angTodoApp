@@ -8,8 +8,9 @@ function rowDirective() {
         templateUrl: "../scripts/component/profile/views/row.html",
         scope:{
             todo: '=',
-            editTodo: '&',
-            deleteTodo: '&',
+            type: '=',
+            edit: '&',
+            del: '&',
             authentic: '='
         }
     }

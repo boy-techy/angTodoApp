@@ -4,7 +4,7 @@ var gulp = require('gulp'),
     cssnano = require('gulp-cssnano')
 
 gulp.task('scss',function(){
-    gulp.src('./app/styles/**/style.scss')
+    gulp.src('./app/styles/**/*.scss')
         .pipe(sass())
         .pipe(concat('style.css'))
         .pipe(cssnano())

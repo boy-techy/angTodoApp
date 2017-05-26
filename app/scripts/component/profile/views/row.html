@@ -1,8 +1,8 @@
 <div class="todoContainer">
     <div><input type="checkbox" ng-model="todo.status" ng-init="todo.status">
         <div ng-if = "authentic === true" class="pull-right">
-            <span class="glyphicon glyphicon-pencil" ng-click="editTodo(todo.id)"></span>
-            <span class="glyphicon glyphicon-trash" ng-click="deleteTodo(userId,type)"></span>
+            <span class="glyphicon glyphicon-pencil" ng-click="edit({index:todo.index,type:type})"></span>
+            <span class="glyphicon glyphicon-trash" ng-click="del({index:todo.index,type:type})"></span>
         </div>
     </div>
     <div>{{todo.title}}</div>

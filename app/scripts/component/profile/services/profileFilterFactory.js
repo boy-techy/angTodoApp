@@ -5,8 +5,10 @@ angular.module("app")
 profileFilterFactory.$inject = ["FormatFactory"];
 
 function profileFilterFactory(formatFactory) {
-    var service = {};
+    var service = {},
+        listeners = [];
     service.getProfile = getProfile;
+    service.registerListeners = registerListeners;
     return service;
     
     ////////////////////////
@@ -20,5 +22,9 @@ function profileFilterFactory(formatFactory) {
             return profile.id === reqestedId
         })
         return users[0];
+    }
+
+    function registerListeners(listener_to_register) {
+
     }
 }

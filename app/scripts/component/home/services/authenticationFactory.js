@@ -22,7 +22,8 @@ function authenticationFactory(log,FormatFactory,UserProcessorFactory) {
 
             var loggedInuser = {
                 authentic: true,
-                id: LoggedInuser.id
+                id: LoggedInuser.id,
+                name: LoggedInuser.user
             };
 
             Object.freeze(loggedInuser);
@@ -31,7 +32,7 @@ function authenticationFactory(log,FormatFactory,UserProcessorFactory) {
             updateListeners("loginViewUpdate");
         }
         else{
-            log.debug("Login Credentials Are Wrong!!!!!");
+            return true;
         }
     }
     

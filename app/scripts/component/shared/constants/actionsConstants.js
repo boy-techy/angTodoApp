@@ -4,7 +4,8 @@ var ACTION = {
     CURRENTUSER: "currentUser",
     LOGOUT: "logout",
     EDIT: "editTodo",
-    DELETE: "deleteTodo"
+    DELETE: "deleteTodo",
+    ADDTODO: "addNewTodo"
 }
 
 angular.module("app")

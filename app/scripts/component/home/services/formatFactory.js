@@ -8,6 +8,8 @@ function formatFactory(UserProducerFactory,log) {
     var service = {},
         cache = "";
     service.userData = userData;
+    service.addUserTodo = addUserTodo;
+    service.toogleEdit = toogleEdit;
     service.updateCache = updateCache;
     service.returnCache = returnCache;
     return service;
@@ -30,6 +32,32 @@ function formatFactory(UserProducerFactory,log) {
 
     function returnCache() {
         return cache;
+    }
+
+    function addUserTodo(newtodo,userid) {
+        newtodo = new Todo(newtodo);
+        var newcache = appendTodo(newtodo,userid);
+        updateCache(newcache);
+    }
+
+    function appendTodo(newtodo,userid) {
+        return cache.map(function (user) {
+            if(user.id === userid){
+                var index = user.todo.complete.length+user.todo.incomplete.length;
+                var newto_do = new Todo(newtodo,index);
+                if(newtodo.isComplete()){
+                    user.todo.complete.push(newto_do);
+                }
+                else{
+                    user.todo.incomplete.push(newto_do);
+                }
+            }
+            return user;
+        })
+    }
+
+    function toogleEdit(editTodo) {
+
     }
 
     function wrapInUser(rawData) {

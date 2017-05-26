@@ -4,7 +4,6 @@ angular.module("app")
 
 function userProfileController() {
     var vm = this;
-
     init();
 
 
@@ -12,6 +11,5 @@ function userProfileController() {
     function init() {
 
     }
-
 
 }

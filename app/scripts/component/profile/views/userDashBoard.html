@@ -1,4 +1,19 @@
 <div class="row dashboard">
+    <div ng-if="vm.authentic === true" class="row addTodo">
+        <div class="col-xs-3 col-xs-offset-5">
+            <button ng-click="vm.addTodoTogg()" class="btn btn-default btn-success">AddTodo</button>
+        </div>
+    </div>
+    <div class="row addTodo">
+        <form ng-if="vm.addTodoToggle === true" class="col-xs-offset-3 col-xs-8">
+            <input type="checkbox" ng-model="vm.addStatus">
+            <input type="text" placeholder="Title" ng-model="vm.addTitle">
+            <input type="date" ng-model="vm.addDate">
+            <input type="text" placeholder="Description" ng-model="vm.addDesc">
+            <span class="btn btn-default btn-success glyphicon glyphicon-ok" ng-click="vm.addTodo()"></span>
+        </form>
+    </div>
+
     <div class="col-xs-3">
         <user-profile profile = "vm.user" authentic="vm.authentic"></user-profile>
     </div>

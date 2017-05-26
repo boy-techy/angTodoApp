@@ -1,8 +1,10 @@
 
 var angular = require("angular");
 require("angular-ui-router");
+require("angularjs-toaster");
+require("angular-animate");
 
-var app = angular.module("app",["ui.router"]);
+var app = angular.module("app",["ui.router","toaster","ngAnimate"]);
 
 var routers =  require("./app.route");
 

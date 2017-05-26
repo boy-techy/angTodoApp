@@ -1,7 +1,8 @@
 <div class="typeSection">
     <p class="caption">{{type}}</p>
     <div ng-repeat="todo in todos track by $index">
-        <row ng-show = "todo.editFlag === false" authentic="authentic" todo="todo" editTodo = "vm.editTodo" deleteTodo ="vm.deleteTodo"></row>
-        <edit-todo ng-show="todo.editFlag === true" authentic="authentic"></edit-todo>
+        <row ng-if = "todo.editFlag === false" type="type" authentic="authentic"
+             todo="todo" edit="edit({index:todo.index,type:type})" del="del({index:todo.index,type:type})"></row>
+        <edit-todo ng-if="todo.editFlag === true" type="type" authentic="authentic"></edit-todo>
     </div>
 </div>

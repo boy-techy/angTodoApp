@@ -6,13 +6,16 @@ function todoTableDirective() {
     return{
         restrict: "E",
         templateUrl: "../scripts/component/profile/views/todoTableDirective.html",
-        controller: "TodoTableController",
-        controllerAs: "vm",
+        controller: ["$scope",function ($scope) {
+            console.log("TodoTable Directive------",$scope);
+        }],
         scope:{
             type: '@',
             userid: '=',
             todos: '=',
-            authentic: '='
+            authentic: '=',
+            edit: '&',
+            del: '&'
         }
     }
 }

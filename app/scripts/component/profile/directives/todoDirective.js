@@ -13,7 +13,6 @@ function todoDirective() {
         scope:{
             todos: '=',
             userid: '=',
-            type: '@',
             authentic: '='
         }
     }
